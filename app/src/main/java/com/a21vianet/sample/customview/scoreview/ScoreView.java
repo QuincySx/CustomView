@@ -216,12 +216,12 @@ public class ScoreView extends View {
         mPercentPaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 10f)));
         mDescribePaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 17f)));
 
-        mCircleOneWidth = DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 240f));
-        mCircleRadius1 = DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 120f));
-        mCircleRadius2 = DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 200f));
-        mCircleRadius3 = DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 240f));
-        mCircleRadius4 = DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 260f));
-        mCircleRadius5 = DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 400f));
+        mCircleOneWidth = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 240f));
+        mCircleRadius1 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 120f));
+        mCircleRadius2 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 200f));
+        mCircleRadius3 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 240f));
+        mCircleRadius4 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 260f));
+        mCircleRadius5 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 400f));
 
         mCircleOnePaint.setStrokeWidth(mCircleOneWidth);
         mCircleTwoPaint.setStrokeWidth(mCircleOneWidth);
@@ -230,6 +230,10 @@ public class ScoreView extends View {
 
     private int getMinSp() {
         return DisplayUtil.px2sp(MyApplication.getContext(), Math.min(mHeight, mWidth));
+    }
+
+    private int getMinDp() {
+        return DisplayUtil.px2dip(MyApplication.getContext(), Math.min(mHeight, mWidth));
     }
 
     @Override
@@ -258,7 +262,7 @@ public class ScoreView extends View {
      * @param canvas
      */
     private void drawCircleOne(Canvas canvas) {
-        canvas.drawCircle(mCenterLocationX, mCenterLocationY, mRadiusOne, mCircleOnePaint);
+        canvas.drawPath(mPathCircleOne, mCircleOnePaint);
 
         float end = mPathMeasureCircleOne.getLength() * offsetValue(mCurrentCircleValue, 0.3f);
         float[] coords = new float[]{0f, 0f};
@@ -272,7 +276,7 @@ public class ScoreView extends View {
      * @param canvas
      */
     private void drawCircleTwo(Canvas canvas) {
-        canvas.drawCircle(mCenterLocationX, mCenterLocationY, mRadiusOne + mRadiusOne * (1 / 4.0f), mCircleTwoPaint);
+        canvas.drawPath(mPathCircleTwo, mCircleTwoPaint);
 
         float end = mPathMeasureCircleTwo.getLength() * offsetValue(mCurrentCircleValue, 0.1f);
         float[] coords = new float[]{0f, 0f};
@@ -296,9 +300,9 @@ public class ScoreView extends View {
      * @param canvas
      */
     private void drawCircleThree(Canvas canvas) {
-        canvas.drawCircle(mCenterLocationX, mCenterLocationY, mRadiusOne + mRadiusOne * (2 / 4.0f), mCircleThreePaint);
+        canvas.drawPath(mPathCircleThree, mCircleThreePaint);
 
-        float end = mPathMeasureCircleThree.getLength() * offsetValue(mCurrentCircleValue, 0.4f);
+        float end = mPathMeasureCircleThree.getLength() * offsetValue(mCurrentCircleValue, 0.7f);
         float[] coords = new float[]{0f, 0f};
         mPathMeasureCircleThree.getPosTan(end, coords, null);
         canvas.drawCircle(coords[0], coords[1], DisplayUtil.sp2px(MyApplication.getContext(), mCircleRadius5), mCircleSmallPaint);
@@ -339,6 +343,11 @@ public class ScoreView extends View {
 
     public ScoreView setTextColor(@ColorInt int color) {
         mTextColor = color;
+        mNumberPaint.setColor(mTextColor);
+
+        mPercentPaint.setColor(mTextColor);
+
+        mDescribePaint.setColor(mTextColor);
         return this;
     }
 
