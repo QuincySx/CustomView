@@ -3,6 +3,7 @@
           package="com.a21vianet.sample.customview">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".xiaomiparallax.XiaomiParallaxActivity">
+        </activity>
+        <activity android:name=".scoreview.ScoreViewActivity">
         </activity>
     </application>
 
