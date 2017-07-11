@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CountdownPathMeasureView">
+        <attr name="AnnulusColor" format="color"></attr>
+        <attr name="CircleColor" format="color"></attr>
+        <attr name="HintColor" format="color"></attr>
+        <attr name="AnnulusWidth" format="dimension"></attr>
+        <attr name="AnnulusPadding" format="dimension"></attr>
+        <attr name="SmallTextSize" format="dimension"></attr>
+        <attr name="HintTextSize" format="dimension"></attr>
+        <attr name="DurationTime" format="integer"></attr>
+        <attr name="CircleHint" format="string"></attr>
+    </declare-styleable>
+</resources>
