@@ -14,8 +14,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.a21vianet.sample.customview.DisplayUtil;
 import com.a21vianet.sample.customview.MyApplication;
+import com.a21vianet.sample.customview.utilitly.DensityUtils;
 
 /**
  * Created by wang.rongqiang on 2017/7/11.
@@ -147,15 +147,15 @@ public class ScoreView extends View {
         mCircleThreePaint.setColor(0x40ffffff);
 
         mNumberPaint.setStyle(Paint.Style.STROKE);
-        mNumberPaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), 46));
+        mNumberPaint.setTextSize(DensityUtils.sp2px(MyApplication.getContext(), 46));
         mNumberPaint.setColor(mTextColor);
         mNumberPaint.setTextAlign(Paint.Align.RIGHT);
 
         mPercentPaint.setColor(mTextColor);
-        mPercentPaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), 22));
+        mPercentPaint.setTextSize(DensityUtils.sp2px(MyApplication.getContext(), 22));
 
         mDescribePaint.setColor(mTextColor);
-        mDescribePaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), 14));
+        mDescribePaint.setTextSize(DensityUtils.sp2px(MyApplication.getContext(), 14));
         mDescribePaint.setTextAlign(Paint.Align.CENTER);
 
         mCircleSmallPaint.setColor(0XFFFFFFFF);
@@ -212,28 +212,28 @@ public class ScoreView extends View {
     }
 
     private void changeSize() {
-        mNumberPaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 5f)));
-        mPercentPaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 10f)));
-        mDescribePaint.setTextSize(DisplayUtil.sp2px(MyApplication.getContext(), getMinSp() * (1 / 17f)));
+        mNumberPaint.setTextSize(DensityUtils.sp2px(MyApplication.getContext(), getMinSp() * (1 / 5f)));
+        mPercentPaint.setTextSize(DensityUtils.sp2px(MyApplication.getContext(), getMinSp() * (1 / 10f)));
+        mDescribePaint.setTextSize(DensityUtils.sp2px(MyApplication.getContext(), getMinSp() * (1 / 17f)));
 
-        mCircleOneWidth = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 240f));
-        mCircleRadius1 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 120f));
-        mCircleRadius2 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 200f));
-        mCircleRadius3 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 240f));
-        mCircleRadius4 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 260f));
-        mCircleRadius5 = DisplayUtil.sp2px(MyApplication.getContext(), getMinDp() * (1 / 400f));
+        mCircleOneWidth = DensityUtils.sp2px(MyApplication.getContext(), getMinDp() * (1 / 240f));
+        mCircleRadius1 = DensityUtils.sp2px(MyApplication.getContext(), getMinDp() * (1 / 120f));
+        mCircleRadius2 = DensityUtils.sp2px(MyApplication.getContext(), getMinDp() * (1 / 200f));
+        mCircleRadius3 = DensityUtils.sp2px(MyApplication.getContext(), getMinDp() * (1 / 240f));
+        mCircleRadius4 = DensityUtils.sp2px(MyApplication.getContext(), getMinDp() * (1 / 260f));
+        mCircleRadius5 = DensityUtils.sp2px(MyApplication.getContext(), getMinDp() * (1 / 400f));
 
         mCircleOnePaint.setStrokeWidth(mCircleOneWidth);
         mCircleTwoPaint.setStrokeWidth(mCircleOneWidth);
         mCircleThreePaint.setStrokeWidth(mCircleOneWidth);
     }
 
-    private int getMinSp() {
-        return DisplayUtil.px2sp(MyApplication.getContext(), Math.min(mHeight, mWidth));
+    private float getMinSp() {
+        return DensityUtils.px2sp(MyApplication.getContext(), Math.min(mHeight, mWidth));
     }
 
-    private int getMinDp() {
-        return DisplayUtil.px2dip(MyApplication.getContext(), Math.min(mHeight, mWidth));
+    private float getMinDp() {
+        return DensityUtils.px2dp(MyApplication.getContext(), Math.min(mHeight, mWidth));
     }
 
     @Override
@@ -267,7 +267,7 @@ public class ScoreView extends View {
         float end = mPathMeasureCircleOne.getLength() * offsetValue(mCurrentCircleValue, 0.3f);
         float[] coords = new float[]{0f, 0f};
         mPathMeasureCircleOne.getPosTan(end, coords, null);
-        canvas.drawCircle(coords[0], coords[1], DisplayUtil.sp2px(MyApplication.getContext(), mCircleRadius1), mCircleSmallPaint);
+        canvas.drawCircle(coords[0], coords[1], DensityUtils.sp2px(MyApplication.getContext(), mCircleRadius1), mCircleSmallPaint);
     }
 
     /**
@@ -281,17 +281,17 @@ public class ScoreView extends View {
         float end = mPathMeasureCircleTwo.getLength() * offsetValue(mCurrentCircleValue, 0.1f);
         float[] coords = new float[]{0f, 0f};
         mPathMeasureCircleTwo.getPosTan(end, coords, null);
-        canvas.drawCircle(coords[0], coords[1], DisplayUtil.sp2px(MyApplication.getContext(), mCircleRadius3), mCircleSmallPaint);
+        canvas.drawCircle(coords[0], coords[1], DensityUtils.sp2px(MyApplication.getContext(), mCircleRadius3), mCircleSmallPaint);
 
         end = mPathMeasureCircleTwo.getLength() * offsetValue(mCurrentCircleValue, 0.5f);
         coords = new float[]{0f, 0f};
         mPathMeasureCircleTwo.getPosTan(end, coords, null);
-        canvas.drawCircle(coords[0], coords[1], DisplayUtil.sp2px(MyApplication.getContext(), mCircleRadius2), mCircleSmallPaint);
+        canvas.drawCircle(coords[0], coords[1], DensityUtils.sp2px(MyApplication.getContext(), mCircleRadius2), mCircleSmallPaint);
 
         end = mPathMeasureCircleTwo.getLength() * offsetValue(mCurrentCircleValue, 0.7f);
         coords = new float[]{0f, 0f};
         mPathMeasureCircleTwo.getPosTan(end, coords, null);
-        canvas.drawCircle(coords[0], coords[1], DisplayUtil.sp2px(MyApplication.getContext(), mCircleRadius4), mCircleSmallPaint);
+        canvas.drawCircle(coords[0], coords[1], DensityUtils.sp2px(MyApplication.getContext(), mCircleRadius4), mCircleSmallPaint);
     }
 
     /**
@@ -305,7 +305,7 @@ public class ScoreView extends View {
         float end = mPathMeasureCircleThree.getLength() * offsetValue(mCurrentCircleValue, 0.7f);
         float[] coords = new float[]{0f, 0f};
         mPathMeasureCircleThree.getPosTan(end, coords, null);
-        canvas.drawCircle(coords[0], coords[1], DisplayUtil.sp2px(MyApplication.getContext(), mCircleRadius5), mCircleSmallPaint);
+        canvas.drawCircle(coords[0], coords[1], DensityUtils.sp2px(MyApplication.getContext(), mCircleRadius5), mCircleSmallPaint);
     }
 
     /**

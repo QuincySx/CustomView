@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".scoreview.ScoreViewActivity">
         </activity>
+        <activity android:name=".addshop.AddShopActivity">
+        </activity>
     </application>
 
 </manifest>
