@@ -9,3 +9,8 @@
 ### 成绩显示效果
 
 ![](video/view2.gif)
+
+
+### 加入购物车效果
+
+![](video/view3.gif)
