@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".countdown.CountdownActivity">
         </activity>
+        <activity android:name=".custombehavior1.CustomBehavior1Activity">
+        </activity>
     </application>
 
 </manifest>
