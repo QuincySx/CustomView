@@ -20,3 +20,8 @@
 
 ![](video/view4.gif)
 
+
+### 一个简单的自定义 Behavior 效果
+
+![](video/view5.gif)
+
