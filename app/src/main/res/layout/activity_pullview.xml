@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/root_view"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.a21vianet.sample.customview.pullview.PullView
         android:id="@+id/pullview"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content">
     </com.a21vianet.sample.customview.pullview.PullView>
 
 </android.support.constraint.ConstraintLayout>

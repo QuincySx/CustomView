@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.a21vianet.sample.customview.utilitly.BezierUtil;
+import com.a21vianet.sample.customview.utilitly.BezierUtility;
 
 import java.lang.ref.WeakReference;
 
@@ -120,7 +120,7 @@ public class AddShopDrawableView extends View {
             public void onAnimationUpdate(ValueAnimator animation) {
                 Float animatedValue = (Float) animation.getAnimatedValue();
 
-                PointF pointF = BezierUtil.CalculateBezierPointForQuadratic(animatedValue,
+                PointF pointF = BezierUtility.CalculateBezierPointForQuadratic(animatedValue,
                         startValue, mControlPointF, endValue);
 
                 mMatrix.reset();

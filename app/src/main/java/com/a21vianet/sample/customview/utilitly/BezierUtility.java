@@ -1,12 +1,13 @@
 package com.a21vianet.sample.customview.utilitly;
 
 import android.graphics.PointF;
+import android.util.Pair;
 
 /**
  * Created by wang.rongqiang on 2017/4/18.
  */
 
-public class BezierUtil {
+public class BezierUtility {
     /**
      * B(t) = (1 - t)^2 * P0 + 2t * (1 - t) * P1 + t^2 * P2, t ∈ [0,1]
      *
@@ -44,5 +45,22 @@ public class BezierUtil {
         point.y = p0.y * temp * temp * temp + 3 * p1.y * t * temp * temp + 3 * p2.y * t * t *
                 temp + p3.y * t * t * t;
         return point;
+    }
+
+    /**
+     * 计算贝塞尔曲线的点，支持高阶贝塞尔曲线，但是不建议使用四阶以上贝塞尔曲线，因为计算量呈几何倍造成手机卡顿
+     *
+     * @param progress
+     * @param pairs
+     * @return
+     */
+    public static Pair<Float, Float> computeBezier(float progress, float[]... pairs) {
+        for (int i = pairs.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                pairs[j][0] = (pairs[j + 1][0] - pairs[j][0]) * progress;
+                pairs[j][1] = (pairs[j + 1][1] - pairs[j][1]) * progress;
+            }
+        }
+        return new Pair(pairs[0][0], pairs[0][1]);
     }
 }
