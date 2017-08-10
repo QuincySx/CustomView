@@ -1,6 +1,8 @@
 package com.a21vianet.sample.customview.pullview;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -14,6 +16,14 @@ public class PullViewActivity extends AppCompatActivity {
 
     float mTagY = 0;
     int mTagDis = 0;
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mPullView.setReset();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +45,26 @@ public class PullViewActivity extends AppCompatActivity {
                             float moveSize = y - mTagY;
                             float progress = moveSize >= mTagDis ? 1 : moveSize / mTagDis;
                             mPullView.setProgress(progress);
+                            if (progress == 1) {
+                                refash();
+                            }
                             return true;
                         }
                         return false;
                     case MotionEvent.ACTION_UP:
+                        float moveSize = event.getY() - mTagY;
+                        if (moveSize < mTagDis) {
+                            mPullView.setReset();
+                        }
                         break;
                 }
                 return false;
             }
         });
+    }
+
+    private void refash() {
+        mHandler.sendEmptyMessageDelayed(0, 1000);
     }
 
 

@@ -1,7 +1,9 @@
 package com.a21vianet.sample.customview.pullview;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
@@ -12,36 +14,47 @@ import android.view.View;
 
 /**
  * Created by quincysx on 2017/8/8.
+ * 简单实现一个下拉效果,没有做过多的配置
  */
 
 public class PullView extends View {
-    /**
-     * 拉动距离
-     */
+    //拉动距离
     private int mTagPullDistance = 400;
 
+    //拖动进度
     private float mProgress = 0;
+    private float mTempProgress = 0;
 
+    //控件的宽高
     private int mWidth;
     private int mHeight;
 
+    //圆的半径
     private int mRadius = 100;
 
     private Paint mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+    //贝塞尔曲线起始点
     private float mBeginSpotX, mBeginSpotY = 0;
 
+    //贝塞尔曲线起始目标点
     private float mTagBeginSpotX = 400;
 
+    //贝塞尔曲线控制点
     private float mControllerSpotX = 0;
     private float mControllerSpotY = 0;
 
+    //贝塞尔曲线终点
     private float mEndSpotX, mEndSpotY;
 
+    //贝塞尔曲线终点在圆上的目标角度
     private float mTagAngle = 120;
 
+    //记录贝塞尔曲线的 Path
     private Path mBeziePath = new Path();
     private Paint mBeziePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    private ValueAnimator mValueAnimator;
 
     public PullView(Context context) {
         super(context);
@@ -69,8 +82,21 @@ public class PullView extends View {
      */
     private void init() {
         mCirclePaint.setStyle(Paint.Style.FILL);
+        mCirclePaint.setColor(Color.RED);
 
         mBeziePaint.setStyle(Paint.Style.FILL);
+        mBeziePaint.setColor(Color.RED);
+
+        mValueAnimator = ValueAnimator.ofFloat(0, 1);
+        mValueAnimator.setDuration(250);
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                mProgress = mTempProgress - mTempProgress * value;
+                requestLayout();
+            }
+        });
     }
 
     @Override
@@ -115,8 +141,8 @@ public class PullView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawCircle(mWidth >> 1, mTagPullDistance * mProgress - mRadius, mRadius, mCirclePaint);
         canvas.drawPath(mBeziePath, mBeziePaint);
+        canvas.drawCircle(mWidth >> 1, mTagPullDistance * mProgress - mRadius, mRadius, mCirclePaint);
     }
 
     /**
@@ -128,7 +154,7 @@ public class PullView extends View {
         int CircleY = (int) (mTagPullDistance * mProgress - mRadius);
 
         mBeziePath.reset();
-        
+
         //左半部分
         {
             //起始点
@@ -169,6 +195,12 @@ public class PullView extends View {
     public void setProgress(float value) {
         mProgress = value;
         requestLayout();
+        mValueAnimator.cancel();
+    }
+
+    public void setReset() {
+        mTempProgress = mProgress;
+        mValueAnimator.start();
     }
 
     public int getTagPullDistance() {
