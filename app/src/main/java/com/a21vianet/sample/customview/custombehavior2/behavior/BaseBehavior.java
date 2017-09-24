@@ -129,14 +129,15 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
 
     private void downSlide(int dy) {
         if (dy < 0) {
+            LinearLayout ImageLayout = (LinearLayout) getDependencyView().getChildAt(0);
+            ViewGroup.LayoutParams imageLayoutLayoutParams = ImageLayout.getLayoutParams();
+
             float measuredHeight = getDependencyView().getTranslationY();
             if ((measuredHeight - dy) + getDependencyView().getMeasuredHeight() <= mMaxHeight) {
                 getDependencyView().setTranslationY(measuredHeight - dy);
+                mCurrentImageHeight = imageLayoutLayoutParams.height;
             } else {
                 getDependencyView().setTranslationY(0);
-
-                LinearLayout ImageLayout = (LinearLayout) getDependencyView().getChildAt(0);
-                ViewGroup.LayoutParams imageLayoutLayoutParams = ImageLayout.getLayoutParams();
                 imageLayoutLayoutParams.height -= dy;
                 mCurrentImageHeight = imageLayoutLayoutParams.height;
                 ImageLayout.setLayoutParams(imageLayoutLayoutParams);
@@ -155,12 +156,18 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
     }
 
     private void zoom() {
+        if (isScrolling) {
+            return;
+        }
+
         if (mCurrentImageHeight <= mDefImageHeight) {
             return;
         }
+
         final int diffHeight = mCurrentImageHeight - mDefImageHeight;
         final LinearLayout ImageLayout = (LinearLayout) getDependencyView().getChildAt(0);
         final ViewGroup.LayoutParams imageLayoutLayoutParams = ImageLayout.getLayoutParams();
+
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -181,7 +188,7 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
     private boolean onUserStopDragging(float velocity) {
         ViewGroup dependencyView = getDependencyView();
         float translateY = dependencyView.getTranslationY();
-        float minHeaderTranslate = -(dependencyView.getHeight() - dependencyView.getChildAt(1).getMeasuredHeight());
+        float minHeaderTranslate = -(mMaxHeight - dependencyView.getChildAt(1).getMeasuredHeight());
 
         if (translateY == 0 || translateY == minHeaderTranslate) {
             return false;
@@ -202,7 +209,6 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
                 targetState = false;
             }
         }
-
         float targetTranslateY = targetState ? minHeaderTranslate : 0;
         mScroller.startScroll(0, (int) translateY, 0, (int) (targetTranslateY - translateY), (int) (1000000 / Math.abs(velocity)));
         mHandler.post(flingRunnable);
@@ -221,19 +227,6 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
             }
         }
     };
-
-    private boolean canUp() {
-        final int measuredHeight = getDependencyView().getMeasuredHeight();
-        final int titleHeight = getDependencyView().getChildAt(1).getMeasuredHeight();
-        if (-(measuredHeight - titleHeight) >= getDependencyView().getTranslationY()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean canDown() {
-        return false;
-    }
 
     private ViewGroup getDependencyView() {
         return (ViewGroup) mDependency.get();
