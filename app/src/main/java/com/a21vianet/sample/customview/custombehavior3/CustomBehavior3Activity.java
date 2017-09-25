@@ -29,7 +29,7 @@ public class CustomBehavior3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_behavior3);
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             mStringList.add("测试" + i);
         }
 

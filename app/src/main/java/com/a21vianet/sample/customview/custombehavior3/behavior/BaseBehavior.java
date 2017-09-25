@@ -196,6 +196,9 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
     private boolean onUserStopDragging(float velocity) {
         ViewGroup dependencyView = getDependencyView();
         float translateY = dependencyView.getTranslationY();
+        if (translateY == 0) {
+            return false;
+        }
         if (velocity > 1000) {
             mScroller.startScroll(0, (int) translateY, 0, (int) -getDependencyView().getTranslationY(), (int) (1000000 / Math.abs(velocity)));
             mHandler.post(flingRunnable);
