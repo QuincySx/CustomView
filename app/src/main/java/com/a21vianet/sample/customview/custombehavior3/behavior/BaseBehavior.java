@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewParentCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,16 +73,14 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
         if (mMaxHeight == -1) {
             View layoutImgView = getDependencyView().getChildAt(0);
             mMaxHeight = mDependency.get().getMeasuredHeight();
-            mMinHeight = mMaxHeight - layoutImgView.getMeasuredHeight();
+            mMinHeight = (int) getDependencyView().getMeasuredHeight();
             mDefImageHeight = layoutImgView.getMeasuredHeight();
 
             getDependencyView().setTranslationY(getImgHeight());
+            child.layout(0, 0, parent.getWidth(), parent.getHeight() - mMinHeight);
+            child.setTranslationY(getDependencyView().getMeasuredHeight() + getDependencyView().getTranslationY());
+            initChildTouchListener();
         }
-
-        child.layout(0, 0, parent.getWidth(), parent.getHeight() - mMinHeight);
-        child.setTranslationY(getDependencyView().getMeasuredHeight() + getDependencyView().getTranslationY());
-
-        initChildTouchListener();
         return true;
     }
 
@@ -120,9 +117,16 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
             float measuredHeight = getDependencyView().getTranslationY();
             if (measuredHeight - dy >= 0) {
                 getDependencyView().setTranslationY(measuredHeight - dy);
+                if (measuredHeight > getImgHeight()) {
+                    imageLayoutLayoutParams.height -= dy;
+                    mCurrentImageHeight = imageLayoutLayoutParams.height;
+                    getImageView().setLayoutParams(imageLayoutLayoutParams);
+                }
                 consumed[1] = dy;
             } else {
                 getDependencyView().setTranslationY(0);
+                imageLayoutLayoutParams.height = mDefImageHeight;
+                getImageView().setLayoutParams(imageLayoutLayoutParams);
             }
         }
     }
@@ -186,7 +190,6 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
 
     @Override
     public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
-        ViewParentCompat.onStartNestedScroll(coordinatorLayout, child, target, (int) velocityY);
         return onUserStopDragging(velocityY);
     }
 
