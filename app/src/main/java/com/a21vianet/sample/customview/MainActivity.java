@@ -9,6 +9,7 @@ import com.a21vianet.sample.customview.addshop.AddShopActivity;
 import com.a21vianet.sample.customview.countdown.CountdownActivity;
 import com.a21vianet.sample.customview.custombehavior1.CustomBehavior1Activity;
 import com.a21vianet.sample.customview.custombehavior2.CustomBehavior2Activity;
+import com.a21vianet.sample.customview.custombehavior3.CustomBehavior3Activity;
 import com.a21vianet.sample.customview.pullview.PullViewActivity;
 import com.a21vianet.sample.customview.scoreview.ScoreViewActivity;
 import com.a21vianet.sample.customview.xiaomiparallax.XiaomiParallaxActivity;
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_custom_behavior2:
                 startActivity(new Intent(this, CustomBehavior2Activity.class));
+                break;
+            case R.id.btn_custom_behavior3:
+                startActivity(new Intent(this, CustomBehavior3Activity.class));
                 break;
             case R.id.btn_pull_view:
                 startActivity(new Intent(this, PullViewActivity.class));

@@ -28,6 +28,7 @@
         <activity android:name=".custombehavior1.CustomBehavior1Activity">
         </activity>
         <activity android:name=".custombehavior2.CustomBehavior2Activity"/>
+        <activity android:name=".custombehavior3.CustomBehavior3Activity"/>
         <activity android:name=".pullview.PullViewActivity">
         </activity>
     </application>
