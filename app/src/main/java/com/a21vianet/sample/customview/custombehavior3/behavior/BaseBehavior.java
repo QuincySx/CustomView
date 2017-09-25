@@ -138,15 +138,14 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
             ViewGroup.LayoutParams imageLayoutLayoutParams = ImageLayout.getLayoutParams();
 
             float measuredHeight = getDependencyView().getTranslationY();
-            if (measuredHeight - dy <= getImgHeight()) {
-                getDependencyView().setTranslationY(measuredHeight - dy);
-                mCurrentImageHeight = imageLayoutLayoutParams.height;
-            } else {
-                getDependencyView().setTranslationY(measuredHeight - dy);
+            getDependencyView().setTranslationY(measuredHeight - dy);
+
+            if (measuredHeight - dy > getImgHeight()) {
                 imageLayoutLayoutParams.height -= dy;
-                mCurrentImageHeight = imageLayoutLayoutParams.height;
                 ImageLayout.setLayoutParams(imageLayoutLayoutParams);
             }
+
+            mCurrentImageHeight = imageLayoutLayoutParams.height;
         }
     }
 
@@ -188,39 +187,26 @@ public class BaseBehavior extends CoordinatorLayout.Behavior {
     @Override
     public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
         ViewParentCompat.onStartNestedScroll(coordinatorLayout, child, target, (int) velocityY);
-//        return onUserStopDragging(velocityY);
-        return false;
+        return onUserStopDragging(velocityY);
     }
 
     private boolean onUserStopDragging(float velocity) {
         ViewGroup dependencyView = getDependencyView();
         float translateY = dependencyView.getTranslationY();
-        float minHeaderTranslate = -(mMaxHeight - dependencyView.getChildAt(1).getMeasuredHeight());
-
-        if (translateY == 0 || translateY == minHeaderTranslate) {
+        if (velocity > 1000) {
+            mScroller.startScroll(0, (int) translateY, 0, (int) -getDependencyView().getTranslationY(), (int) (1000000 / Math.abs(velocity)));
+            mHandler.post(flingRunnable);
+            return true;
+        } else if (velocity < 1000) {
+            if (translateY >= getImgHeight()) {
+                return false;
+            }
+            mScroller.startScroll(0, (int) translateY, 0, (int) (getImageView().getMeasuredHeight() - getDependencyView().getTranslationY()), (int) (1000000 / Math.abs(velocity)));
+            mHandler.post(flingRunnable);
+            return true;
+        } else {
             return false;
         }
-
-        boolean targetState; // Flag indicates whether to expand the content.
-        if (Math.abs(velocity) <= 800) {
-            if (Math.abs(translateY) < Math.abs(translateY - minHeaderTranslate)) {
-                targetState = false;
-            } else {
-                targetState = true;
-            }
-            velocity = 800; // Limit velocity's minimum value.
-        } else {
-            if (velocity > 0) {
-                targetState = true;
-            } else {
-                targetState = false;
-            }
-        }
-        float targetTranslateY = targetState ? minHeaderTranslate : 0;
-        mScroller.startScroll(0, (int) translateY, 0, (int) (targetTranslateY - translateY), (int) (1000000 / Math.abs(velocity)));
-        mHandler.post(flingRunnable);
-        isScrolling = true;
-        return true;
     }
 
     private Runnable flingRunnable = new Runnable() {
