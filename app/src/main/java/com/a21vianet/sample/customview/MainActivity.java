@@ -2,7 +2,7 @@ package com.a21vianet.sample.customview;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.a21vianet.sample.customview.addshop.AddShopActivity;
@@ -10,6 +10,7 @@ import com.a21vianet.sample.customview.countdown.CountdownActivity;
 import com.a21vianet.sample.customview.custombehavior1.CustomBehavior1Activity;
 import com.a21vianet.sample.customview.custombehavior2.CustomBehavior2Activity;
 import com.a21vianet.sample.customview.custombehavior3.CustomBehavior3Activity;
+import com.a21vianet.sample.customview.passwordEdit.PassWordEditActivity;
 import com.a21vianet.sample.customview.pullview.PullViewActivity;
 import com.a21vianet.sample.customview.scoreview.ScoreViewActivity;
 import com.a21vianet.sample.customview.xiaomiparallax.XiaomiParallaxActivity;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_pull_view:
                 startActivity(new Intent(this, PullViewActivity.class));
+                break;
+            case R.id.btn_password_view:
+                startActivity(new Intent(this, PassWordEditActivity.class));
                 break;
         }
     }

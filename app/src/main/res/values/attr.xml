@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CountdownPathMeasureView">
-        <attr name="AnnulusColor" format="color"></attr>
-        <attr name="CircleColor" format="color"></attr>
-        <attr name="HintColor" format="color"></attr>
-        <attr name="AnnulusWidth" format="dimension"></attr>
-        <attr name="AnnulusPadding" format="dimension"></attr>
-        <attr name="SmallTextSize" format="dimension"></attr>
-        <attr name="HintTextSize" format="dimension"></attr>
-        <attr name="DurationTime" format="integer"></attr>
-        <attr name="CircleHint" format="string"></attr>
+        <attr name="AnnulusColor" format="color" />
+        <attr name="CircleColor" format="color" />
+        <attr name="HintColor" format="color" />
+        <attr name="AnnulusWidth" format="dimension" />
+        <attr name="AnnulusPadding" format="dimension" />
+        <attr name="SmallTextSize" format="dimension" />
+        <attr name="HintTextSize" format="dimension" />
+        <attr name="DurationTime" format="integer" />
+        <attr name="CircleHint" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="PassWordEditTextView">
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="pwdIsBoldText" format="boolean" />
+        <attr name="pwdPasswordText" format="string" />
+        <!-- 输入的文字的个数 -->
+        <attr name="pwdInputCount" format="integer" />
+        <!-- 文字之间的间距 -->
+        <attr name="pwdTextSpace" format="dimension" />
+        <!-- 文字的背景 -->
+        <attr name="pwdTextBackground" format="reference" />
+        <attr name="pwdTextBackgroundWidth" format="dimension" />
+        <attr name="pwdTextBackgroundHeight" format="dimension" />
+        <!-- 是否是密码 -->
+        <attr name="pwdIsPassword" format="boolean" />
+        <!-- 光标一直显示 -->
+        <attr name="pwdCursorAlwaysOn" format="boolean" />
+        <!-- 光标闪烁频率 -->
+        <attr name="pwdCursorInterval" format="integer" />
+        <!-- 光标 -->
+        <attr name="pwdCursorDrawable" format="reference" />
+        <attr name="pwdCursorDrawableWidth" format="dimension" />
+        <attr name="pwdCursorDrawableHeight" format="dimension" />
     </declare-styleable>
 </resources>

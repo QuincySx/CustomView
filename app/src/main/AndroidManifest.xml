@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.a21vianet.sample.customview">
+    package="com.a21vianet.sample.customview">
 
     <application
         android:name=".MyApplication"
@@ -10,27 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".passwordEdit.PassWordEditActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".xiaomiparallax.XiaomiParallaxActivity">
-        </activity>
-        <activity android:name=".scoreview.ScoreViewActivity">
-        </activity>
-        <activity android:name=".addshop.AddShopActivity">
-        </activity>
-        <activity android:name=".countdown.CountdownActivity">
-        </activity>
-        <activity android:name=".custombehavior1.CustomBehavior1Activity">
-        </activity>
-        <activity android:name=".custombehavior2.CustomBehavior2Activity"/>
-        <activity android:name=".custombehavior3.CustomBehavior3Activity"/>
-        <activity android:name=".pullview.PullViewActivity">
-        </activity>
+        <activity android:name=".xiaomiparallax.XiaomiParallaxActivity"></activity>
+        <activity android:name=".scoreview.ScoreViewActivity"></activity>
+        <activity android:name=".addshop.AddShopActivity"></activity>
+        <activity android:name=".countdown.CountdownActivity"></activity>
+        <activity android:name=".custombehavior1.CustomBehavior1Activity"></activity>
+        <activity android:name=".custombehavior2.CustomBehavior2Activity" />
+        <activity android:name=".custombehavior3.CustomBehavior3Activity" />
+        <activity android:name=".pullview.PullViewActivity"></activity>
     </application>
 
 </manifest>

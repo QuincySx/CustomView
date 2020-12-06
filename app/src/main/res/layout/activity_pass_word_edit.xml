@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cccccc"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".passwordEdit.PassWordEditActivity">
+
+    <com.a21vianet.sample.customview.passwordEdit.PassWordEditTextView
+        android:id="@+id/passWordEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="30dp"
+        app:pwdCursorAlwaysOn="true"
+        app:pwdCursorDrawable="@drawable/shape_password_edit_cursor_drawable"
+        app:pwdCursorDrawableHeight="60dp"
+        app:pwdCursorDrawableWidth="60dp"
+        app:pwdTextBackground="@drawable/shape_password_edit_drawable"
+        app:pwdTextBackgroundHeight="60dp"
+        app:pwdTextBackgroundWidth="60dp" />
+
+</LinearLayout>

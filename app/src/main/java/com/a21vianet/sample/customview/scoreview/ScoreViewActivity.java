@@ -1,7 +1,7 @@
 package com.a21vianet.sample.customview.scoreview;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.a21vianet.sample.customview.R;

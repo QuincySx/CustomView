@@ -3,7 +3,7 @@ package com.a21vianet.sample.customview.custombehavior3.behavior;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
